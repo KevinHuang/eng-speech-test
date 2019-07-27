@@ -1,0 +1,24 @@
+
+
+    <p>Events:</p>
+    <div class="example-events">
+      <div *ngFor="let e of events">{{ e }}</div>
+    </div>
+    <div>
+      <h1 class="mat-display-1"><i class="fa fa-bell"></i>{{ head }}</h1>
+
+
+      <div *ngIf="loading" class="alert alert-info">資料載入中...</div>
+
+      <div *ngIf="!loading">
+        <div *ngIf="!error">
+          <!-- <h2 class="alert alert-success">已連接: {{ accessPoint }}</!--> --> 
+          <h2>學校資訊：</h2>
+          <pre class="alert alert-success">{{ schoolInfo | json }}</pre>
+        </div>
+        <pre
+          *ngIf="error"
+          class="alert alert-danger"
+        >發生錯誤：<br/>{{error | json}}</pre>
+      </div>
+    </div>

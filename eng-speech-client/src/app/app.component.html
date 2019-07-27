@@ -1,0 +1,19 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [(opened)]="opened"
+    (opened)="events.push('open!')"
+    (closed)="events.push('close!')"
+  >
+    <app-sidenav-header></app-sidenav-header>
+    <app-sidenav-list (sidenavClose)="decideClose()"></app-sidenav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header (sidenavToggle)="decideToggle();"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
