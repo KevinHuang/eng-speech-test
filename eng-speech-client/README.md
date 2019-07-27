@@ -1,7 +1,7 @@
-Angular Gadget
+英語口說練習測驗
 ====
 
-## Angular Material 的樣板，且具有呼叫 DSA Service 的 Library.
+## 呼叫 Web Speech API, 便是使用者說出的英語內容，進行口語練習測驗。 
 
 ## 前置要求
 * 安裝 Node.js
@@ -10,11 +10,11 @@ Angular Gadget
 * 安裝 Angular CLI (`yarn global add @angular/cli`)。
 
 ## 開始開發
-* `git clone https://github.com/KevinHuang/angular-material-template.git myproject`
-* `cd mygadget`
+* `git clone https://github.com/KevinHuang/eng-speech-test.git `
+* `cd eng-speech-test/eng-speech-client`
 * `yarn` #安裝套件
 * `yarn start` ＃啟動 angular server。
-* 連到 `http://localhost:4200` 開始 Debug。
+* 連到 `http://localhost:4200` 開始 使用
 
 ## 部署
 * `yarn build`
@@ -36,5 +36,5 @@ Angular Gadget
 這作法會將 jquery 打包進 bundle 裡面，如果不要打包，可以直接放在 `assets` 目錄裡，然後在 `index.html` 直接引用。
 
 ## 參考
-### Side Navigation 作法：https://code-maze.com/angular-material-navigation/
+### Speech Recognition 套件：https://github.com/kamiazya/ngx-speech-recognition
 
