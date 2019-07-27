@@ -1,0 +1,8 @@
+<p>speech-test works!</p>
+<p>RxCompoent.message: {{message}}</p>
+  <button
+    [disabled]="service.started$ | async"
+    (click)="listen()"
+  >listen</button>
+  <p>lang: en</p>
+  <p>grammars: none</p>

@@ -21,9 +21,13 @@
     "@angular/platform-browser": "^8.1.2",
     "@angular/platform-browser-dynamic": "^8.1.2",
     "@angular/router": "^8.1.2",
+    "@kamiazya/ngx-speech-recognition": "^0.4.3",
     "core-js": "~3.1.4",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.15",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.2",
+    "systemjs": "^4.1.0",
     "tslint": "^5.11.0",
     "zone.js": "^0.9.1"
   },
