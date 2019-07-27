@@ -36,5 +36,5 @@
 這作法會將 jquery 打包進 bundle 裡面，如果不要打包，可以直接放在 `assets` 目錄裡，然後在 `index.html` 直接引用。
 
 ## 參考
-### Speech Recognition 套件：https://github.com/kamiazya/ngx-speech-recognition
+### Speech Recognition 使用之套件：https://github.com/kamiazya/ngx-speech-recognition
 
