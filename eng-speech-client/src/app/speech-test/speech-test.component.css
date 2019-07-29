@@ -1,0 +1,192 @@
+div.number-box {
+    display: inline-flex ;
+    flex-direction: row ;
+    flex-wrap: wrap ;
+    justify-content: flex-start ;
+    align-items: center ;
+    /* max-width: 100%; */
+    padding: 4px 36px ;
+}
+
+div.number-box > .number {
+    height: 48px;
+    width: 48px;
+    border-radius: 50% ;
+    margin-left: 8px ;
+    display: flex ;
+    justify-content: center;
+    align-items: center ;
+    /* text-align: center ; 水平置中 */
+    /* line-height: 24px ; 垂直置中 */
+    border: 2px solid white ;
+}
+
+div.number-box > .number:hover {
+    cursor: pointer;
+    border: 2px solid red ;
+}
+
+div.number-box > div.current {
+    border: 2px solid blue ;
+}
+
+div.number-box > div.right {
+    background-color: lightgreen ;
+}
+
+div.number-box > div.wrong {
+    background-color: pink ;
+}
+
+div.number-box > div.noAnswer {
+    background-color: #bbb;
+}
+
+div.qContainer {
+    display: flex ;
+    flex-direction: column ;
+}
+
+div.qContent, div.qAnswer {
+    display: flex ;
+    border: 1px solid blue ;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    font-size: 2rem;
+    
+}
+
+div.qAnswer {
+    color: red ;
+    font-size: 1rem ;
+}
+
+div.qContent > mat-icon, div.q-controls > mat-icon {
+    font-size: 3rem ;
+}
+
+
+div.qContent > mat-icon:hover {
+    cursor: pointer;
+}
+
+mat-icon.stopRec {
+    color: red ;
+    font-size: 3rem;
+    margin-right: 32px;
+    margin-top: 16px;
+}
+
+div.mic, div.pauseRec {
+    display: inline-flex ;
+    flex-direction: row ;
+    justify-content: center ;
+    align-items: center ;
+    width : 32px;
+    height: 32px;
+    /* text-align: center ; /* 水平置中 */
+    /* line-height: 36px ; 垂直置中 */ 
+    border-radius: 50%;
+    border: 4px solid black;
+    /* margin-left: 4px ;
+    margin-top: 4px ; */
+}
+div.pauseRec {
+    border: 0px ;
+    margin: 0px ;
+    font-size: 3rem;
+}
+
+div.mic:hover {
+    cursor: pointer ;
+}
+
+/* -- div.---  */
+mat-card.q-container {
+    display: flex ;
+    flex-direction: column ;
+    padding: 16px;
+    max-width: 800px;
+}
+
+div.q-content-area , div.q-answer-area{
+    width: 100% ;
+    display: flex;
+    flex-direction: row ;
+    min-height: 160px;
+    border-top: 1px solid lightgray ;
+}
+
+div.q-answer-area {
+    margin-top: 10px;
+    border-bottom: 0px;
+}
+
+div.q-nav {
+    display: flex ;
+    flex-direction: column;
+    justify-content: center ;
+    min-width: 32px;
+}
+
+div.q-nav:hover {
+    background-color:rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+div.q-nav > mat-icon {
+    font-size: 4rem ;
+    color: lightgray ;
+    margin-top: -32px;
+}
+
+div.q-nav > mat-icon.left {
+    margin-left: -16px ;
+}
+
+div.q-nav > mat-icon.right {
+    margin-left: -16px ;
+}
+
+div.q-nav > mat-icon:hover {
+    cursor: pointer ;
+    color: gray ;
+}
+
+div.ans {
+    justify-content: flex-start;
+    margin-top: 8px;
+}
+
+
+
+div.q-content {
+    flex: 1;
+    /* background-color: lightyellow; */
+    display: flex;
+    justify-content: center ;
+    align-items: center ;
+    font-size: 4rem;
+}
+
+div.q-answer-block {
+    flex: 1;
+    /* background-color: lightgreen; */
+    position: relative;
+}
+
+div.q-answer {
+    display: flex;
+    justify-content: center ;
+    align-items: center ;
+    font-size: 3rem;
+    height: 100%;
+}
+
+div.q-controls {
+    position: absolute ;
+    top: 8px;
+    right: 8px;
+    z-index: 99;
+}
