@@ -35,7 +35,7 @@ import { getTreeMissingMatchingNodeDefError } from '@angular/cdk/tree';
 })
 export class SpeechTestComponent implements OnInit {
   message = '';
-  currentQ: any ;         // 目前的題目
+  currentQ: any;         // 目前的題目
   // currentQIndex = 0;
   // currentQContent = '';
   isRecording = false;    // 是否正在錄音中
@@ -80,8 +80,9 @@ export class SpeechTestComponent implements OnInit {
   }
 
   showQ(q) {
-    this.currentQ = q ;
+    this.currentQ = q;
     this.message = '';         // reset ...
+    this.listen();
     // this.currentQIndex = q.index;
     // this.currentQContent = q.content;
     // this.answerStatus = AnswerStatus.noAnswer;
@@ -98,13 +99,6 @@ export class SpeechTestComponent implements OnInit {
     else if (q.ans_status === AnswerStatus.answerWrong) {
       className = "wrong";
     }
-
-    // if (q.index % 3 === 1) {
-    //   className = 'right';
-    // }
-    // else if (q.index % 3 === 2) {
-    //   className = 'wrong';
-    // }
 
     if (q.index === this.currentQ.index) {
       className = `${className} current`;
@@ -123,14 +117,14 @@ export class SpeechTestComponent implements OnInit {
 
   checkAnswer() {
     console.log(`${this.message.toLowerCase()} vs ${this.currentQ.content.toLowerCase()}`);
-    this.currentQ.stud_ans = this.message ;
-    const isAnswerRight: boolean = (this.message.toLowerCase() === this.currentQ.content.replace("-"," ").toLowerCase());
+    this.currentQ.stud_ans = this.message;
+    const isAnswerRight: boolean = (this.message.toLowerCase() === this.currentQ.content.replace("-", " ").toLowerCase());
     this.answerStatus = isAnswerRight ? AnswerStatus.answerRight : AnswerStatus.answerWrong;
-    this.currentQ.ans_status = this.answerStatus ;
+    this.currentQ.ans_status = this.answerStatus;
 
     if (isAnswerRight) {
       console.log("go to next question after 3 secs later ....");
-      setTimeout(this.nextQ.bind(this), 2000 );
+      setTimeout(this.nextQ.bind(this), 1000);
     }
 
     console.log(isAnswerRight);
@@ -138,14 +132,28 @@ export class SpeechTestComponent implements OnInit {
   }
 
   nextQ() {
-    const currentQIndex : number = this.currentQ.index + 1;
+    let currentQIndex: number = this.currentQ.index + 1;
     console.log(`currentQIndex : ${currentQIndex}`);
-    if (currentQIndex <= this.questions.length) {
-      const q = this.questions[currentQIndex - 1];
-      this.currentQ = q ;
-      this.showQ(q);
-      this.ref.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
+    if (currentQIndex > this.questions.length) {
+      currentQIndex = 1;
     }
+    const q = this.questions[currentQIndex - 1];
+    this.currentQ = q;
+    this.showQ(q);
+    this.ref.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
+  }
+
+  prevQ() {
+    let currentQIndex: number = this.currentQ.index - 1;
+    console.log(`currentQIndex : ${currentQIndex}`);
+
+    if (currentQIndex < 1) {
+      currentQIndex = this.questions.length;
+    }
+    const q = this.questions[currentQIndex - 1];
+    this.currentQ = q;
+    this.showQ(q);
+    this.ref.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
   }
 
 

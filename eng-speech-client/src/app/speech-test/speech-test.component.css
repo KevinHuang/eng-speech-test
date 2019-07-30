@@ -1,24 +1,33 @@
 div.number-box {
-    display: inline-flex ;
+    display: flex ;
     flex-direction: row ;
     flex-wrap: wrap ;
     justify-content: flex-start ;
     align-items: center ;
     /* max-width: 100%; */
-    padding: 4px 36px ;
+    padding: 4px 8px ;
 }
 
 div.number-box > .number {
     height: 48px;
     width: 48px;
     border-radius: 50% ;
-    margin-left: 8px ;
+    /* margin-left: 8px ; */
     display: flex ;
     justify-content: center;
     align-items: center ;
     /* text-align: center ; 水平置中 */
     /* line-height: 24px ; 垂直置中 */
     border: 2px solid white ;
+}
+
+div.number-box > .space {
+    flex: 1;
+}
+
+div.number-box > .timer {
+    font-size: 2rem ;
+    color: blueviolet;
 }
 
 div.number-box > .number:hover {
@@ -31,11 +40,13 @@ div.number-box > div.current {
 }
 
 div.number-box > div.right {
-    background-color: lightgreen ;
+    background-color: green ;
+    color: white ;
 }
 
 div.number-box > div.wrong {
-    background-color: pink ;
+    background-color: red ;
+    color: white ;
 }
 
 div.number-box > div.noAnswer {
@@ -168,6 +179,7 @@ div.q-content {
     justify-content: center ;
     align-items: center ;
     font-size: 4rem;
+    font-weight: 500 ;
 }
 
 div.q-answer-block {

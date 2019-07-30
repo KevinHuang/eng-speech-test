@@ -10,6 +10,10 @@
     >
       <span>{{ q.index }}</span>
     </div>
+    <div class="space"></div>
+    <div class="timer">
+      {{ "0:31" }}
+    </div>
   </div>
 
   <!-- 題目內容-->
@@ -49,45 +53,3 @@
     <!-- <div class="q-nav ans"></div> -->
   </div>
 </mat-card>
-
-
-
-
-
-<div class="qContainer">
-  <!-- 題目內容 -->
-  <div class="qContent">
-    {{ currentQ.content }}
-
-    <!-- 開始錄音按鈕 -->
-    <div class="mic" *ngIf="currentQ.ans_status == 1 && !isRecording">
-      <mat-icon (click)="startRecording()">mic</mat-icon>
-    </div>
-
-    <!-- 暫停按鈕 -->
-    <mat-icon
-      class="stopRec"
-      *ngIf="
-        (currentQ.ans_status === 1 && isRecording) || currentQ.ans_status === 3
-      "
-      (click)="stopRecording()"
-      >pause_circle_outline</mat-icon
-    >
-
-    <!-- 下一題，當答對時才出現 -->
-    <div class="mic" *ngIf="currentQ.ans_status === 2" (click)="nextQ()">
-      <mat-icon>navigate_next</mat-icon>
-    </div>
-  </div>
-  <!-- 答案內容 -->
-  <div class="qAnswer">
-    <span>{{ message }}</span>
-    <mat-icon *ngIf="answerStatus === 2">check_circle_outline</mat-icon>
-    <mat-icon *ngIf="answerStatus === 3">highlight_off</mat-icon>
-  </div>
-</div>
-
-<p>RxCompoent.message: {{ message }}</p>
-<button [disabled]="service.started$ | async" (click)="listen()">listen</button>
-<p>lang: en</p>
-<p>grammars: none</p>
