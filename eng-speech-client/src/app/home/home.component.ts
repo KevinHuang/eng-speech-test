@@ -25,26 +25,26 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.head = 'Hello Gadget!';
+    this.head = '英文口說練習，請按左邊「開始練習」按鈕開始';
 
-    try {
-      this.loading = true;
+    // try {
+    //   this.loading = true;
 
-      // 取得 contract 連線。
-      const contract = await this.gadget.getContract('basic.public');
+    //   // 取得 contract 連線。
+    //   const contract = await this.gadget.getContract('basic.public');
 
-      this.accessPoint = contract.getAccessPoint;
+    //   this.accessPoint = contract.getAccessPoint;
 
-      // 呼叫 service。
-      this.schoolInfo = await contract.send('beta.GetSystemConfig', {
-        Name: '學校資訊'
-      });
+    //   // 呼叫 service。
+    //   this.schoolInfo = await contract.send('beta.GetSystemConfig', {
+    //     Name: '學校資訊'
+    //   });
 
-    } catch (err) {
-      this.error = err;
-    } finally {
-      this.loading = false;
-    }
+    // } catch (err) {
+    //   this.error = err;
+    // } finally {
+    //   this.loading = false;
+    // }
     
   }
 }

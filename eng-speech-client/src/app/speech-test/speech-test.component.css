@@ -202,3 +202,20 @@ div.q-controls {
     right: 8px;
     z-index: 99;
 }
+
+div.q-hint {
+    position: absolute ;
+    top: 8px;
+    left: 8px;
+    z-index: 99;
+}
+
+div.q-hint > mat-icon {
+    font-size: 3rem;
+    color: lightskyblue ;
+}
+
+div.q-hint > mat-icon:hover {
+    cursor: pointer;
+    color: blue ;
+}

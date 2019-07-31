@@ -36,6 +36,12 @@
     <!-- <div class="q-nav"></div> -->
 
     <div class="q-answer-block">
+      <!-- hint area -->
+      <div class="q-hint">
+          <mat-icon class="speaker" (click)="speak()">volume_up</mat-icon>
+      </div>
+
+      <!-- controls -->
       <div class="q-controls">
         <div class="mic" *ngIf="!(service.started$ | async)">
           <mat-icon (click)="listen()">mic</mat-icon>
@@ -47,6 +53,7 @@
           >
         </div>
       </div>
+      <!-- answer content -->
       <div class="q-answer">{{ message }}</div>
     </div>
 

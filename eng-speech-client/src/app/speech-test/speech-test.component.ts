@@ -17,6 +17,8 @@ import {
 } from '@kamiazya/ngx-speech-recognition';
 import { getTreeMissingMatchingNodeDefError } from '@angular/cdk/tree';
 
+import Speech from 'speak-tts'
+
 @Component({
   selector: 'app-speech-test',
   templateUrl: './speech-test.component.html',
@@ -41,28 +43,69 @@ export class SpeechTestComponent implements OnInit {
   isRecording = false;    // 是否正在錄音中
   isAnswerRight = false;  // 是否答對
   answerStatus: number = AnswerStatus.noAnswer;
+  speech: any;
+
+  // questions = [
+  //   { index: 1, content: "Apple", ans_status: AnswerStatus.noAnswer },
+  //   { index: 2, content: "self-confidence", ans_status: AnswerStatus.noAnswer },
+  //   { index: 3, content: "Learn", ans_status: AnswerStatus.noAnswer },
+  //   { index: 4, content: "Free", ans_status: AnswerStatus.noAnswer },
+  //   { index: 5, content: "Forum", ans_status: AnswerStatus.noAnswer },
+  //   { index: 6, content: "News", ans_status: AnswerStatus.noAnswer },
+  //   { index: 7, content: "Search", ans_status: AnswerStatus.noAnswer },
+  //   { index: 8, content: "Tutorial", ans_status: AnswerStatus.noAnswer },
+  //   { index: 9, content: "Command", ans_status: AnswerStatus.noAnswer },
+  //   { index: 10, content: "Animation", ans_status: AnswerStatus.noAnswer }
+  // ];
 
   questions = [
-    { index: 1, content: "Apple", ans_status: AnswerStatus.noAnswer },
-    { index: 2, content: "self-confidence", ans_status: AnswerStatus.noAnswer },
-    { index: 3, content: "Learn", ans_status: AnswerStatus.noAnswer },
-    { index: 4, content: "Free", ans_status: AnswerStatus.noAnswer },
-    { index: 5, content: "Forum", ans_status: AnswerStatus.noAnswer },
-    { index: 6, content: "News", ans_status: AnswerStatus.noAnswer },
-    { index: 7, content: "Search", ans_status: AnswerStatus.noAnswer },
-    { index: 8, content: "Tutorial", ans_status: AnswerStatus.noAnswer },
-    { index: 9, content: "Command", ans_status: AnswerStatus.noAnswer },
-    { index: 10, content: "Animation", ans_status: AnswerStatus.noAnswer }
-  ];
-
+    { index: 1, content: "neighbor", ans_status: AnswerStatus.noAnswer },
+    { index: 2, content: "neighborhood", ans_status: AnswerStatus.noAnswer },
+    { index: 3, content: "settle in", ans_status: AnswerStatus.noAnswer },
+    { index: 4, content: "the scoop", ans_status: AnswerStatus.noAnswer },
+    { index: 5, content: "tip", ans_status: AnswerStatus.noAnswer },
+    { index: 6, content: "take a rain check", ans_status: AnswerStatus.noAnswer },
+    { index: 7, content: "social event", ans_status: AnswerStatus.noAnswer },
+    { index: 8, content: "joiner", ans_status: AnswerStatus.noAnswer },
+    { index: 9, content: "keep to oneself", ans_status: AnswerStatus.noAnswer },
+    { index: 10, content: "appoint oneself", ans_status: AnswerStatus.noAnswer },
+    { index: 11, content: "resident", ans_status: AnswerStatus.noAnswer },
+    { index: 12, content: "inundate", ans_status: AnswerStatus.noAnswer },
+    { index: 13, content: "fend off", ans_status: AnswerStatus.noAnswer },
+    { index: 14, content: "suit yourself", ans_status: AnswerStatus.noAnswer },
+    { index: 15, content: "turn down", ans_status: AnswerStatus.noAnswer },
+    { index: 16, content: "reputation", ans_status: AnswerStatus.noAnswer },
+    { index: 17, content: "recluse", ans_status: AnswerStatus.noAnswer },
+    { index: 18, content: "busybody", ans_status: AnswerStatus.noAnswer }
+  ]
   constructor(
     public service: RxSpeechRecognitionService,
     private ref: ChangeDetectorRef
   ) { }
 
+
+
   ngOnInit() {
     this.currentQ = this.questions[0];
     this.showQ(this.currentQ);
+
+    this.speech = new Speech() // will throw an exception if not browser supported
+    if (this.speech.hasBrowserSupport()) { // returns a boolean
+      console.log("speech synthesis supported")
+    }
+
+    this.speech.init({
+      'volume': 1,
+      'lang': 'en-US',
+      'rate': 1,
+      'pitch': 1,
+      'splitSentences': true,
+      'listeners': {
+        'onvoiceschanged': (voices) => {
+          console.log("Event voiceschanged", voices)
+        }
+      }
+    })
   }
 
   listen() {
@@ -77,6 +120,17 @@ export class SpeechTestComponent implements OnInit {
         }
         console.log(list, this.message);
       });
+  }
+
+  speak() {
+    console.log(`speak current q : ${this.currentQ}`);
+    this.speech.speak({
+      text: this.currentQ.content,
+    }).then(() => {
+      console.log("Success !")
+    }).catch(e => {
+      console.error("An error occurred :", e)
+    })
   }
 
   showQ(q) {
@@ -118,7 +172,7 @@ export class SpeechTestComponent implements OnInit {
   checkAnswer() {
     console.log(`${this.message.toLowerCase()} vs ${this.currentQ.content.toLowerCase()}`);
     this.currentQ.stud_ans = this.message;
-    const isAnswerRight: boolean = (this.message.toLowerCase() === this.currentQ.content.replace("-", " ").toLowerCase());
+    const isAnswerRight: boolean = (this.message.replace("-", " ").toLowerCase() === this.currentQ.content.replace("-", " ").toLowerCase());
     this.answerStatus = isAnswerRight ? AnswerStatus.answerRight : AnswerStatus.answerWrong;
     this.currentQ.ans_status = this.answerStatus;
 
