@@ -67,16 +67,16 @@ export class SpeechTestComponent implements OnInit {
     { index: 6, content: "take a rain check", ans_status: AnswerStatus.noAnswer },
     { index: 7, content: "social event", ans_status: AnswerStatus.noAnswer },
     { index: 8, content: "joiner", ans_status: AnswerStatus.noAnswer },
-    { index: 9, content: "keep to oneself", ans_status: AnswerStatus.noAnswer },
-    { index: 10, content: "appoint oneself", ans_status: AnswerStatus.noAnswer },
-    { index: 11, content: "resident", ans_status: AnswerStatus.noAnswer },
-    { index: 12, content: "inundate", ans_status: AnswerStatus.noAnswer },
-    { index: 13, content: "fend off", ans_status: AnswerStatus.noAnswer },
-    { index: 14, content: "suit yourself", ans_status: AnswerStatus.noAnswer },
-    { index: 15, content: "turn down", ans_status: AnswerStatus.noAnswer },
-    { index: 16, content: "reputation", ans_status: AnswerStatus.noAnswer },
-    { index: 17, content: "recluse", ans_status: AnswerStatus.noAnswer },
-    { index: 18, content: "busybody", ans_status: AnswerStatus.noAnswer }
+    // { index: 9, content: "keep to oneself", ans_status: AnswerStatus.noAnswer },
+    // { index: 10, content: "appoint oneself", ans_status: AnswerStatus.noAnswer },
+    // { index: 11, content: "resident", ans_status: AnswerStatus.noAnswer },
+    // { index: 12, content: "inundate", ans_status: AnswerStatus.noAnswer },
+    // { index: 13, content: "fend off", ans_status: AnswerStatus.noAnswer },
+    // { index: 14, content: "suit yourself", ans_status: AnswerStatus.noAnswer },
+    // { index: 15, content: "turn down", ans_status: AnswerStatus.noAnswer },
+    // { index: 16, content: "reputation", ans_status: AnswerStatus.noAnswer },
+    // { index: 17, content: "recluse", ans_status: AnswerStatus.noAnswer },
+    // { index: 18, content: "busybody", ans_status: AnswerStatus.noAnswer }
   ]
   constructor(
     public service: RxSpeechRecognitionService,
@@ -208,6 +208,11 @@ export class SpeechTestComponent implements OnInit {
     this.currentQ = q;
     this.showQ(q);
     this.ref.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
+  }
+
+  openTranslate() {
+    const url = `https://translate.google.com.tw/?hl=zh-TW#view=home&op=translate&sl=en&tl=zh-TW&text=${encodeURIComponent(this.currentQ.content)}`;
+    window.open(url);
   }
 
 

@@ -208,14 +208,17 @@ div.q-hint {
     top: 8px;
     left: 8px;
     z-index: 99;
+    display: flex ;
+    flex-direction: column ;
 }
 
-div.q-hint > mat-icon {
+div.q-hint  mat-icon {
     font-size: 3rem;
     color: lightskyblue ;
+    margin-bottom: 24px ;
 }
 
-div.q-hint > mat-icon:hover {
+div.q-hint  mat-icon:hover {
     cursor: pointer;
     color: blue ;
 }
