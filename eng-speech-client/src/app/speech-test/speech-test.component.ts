@@ -3,10 +3,7 @@
  *  利用此特性，進行英文口語練習。
  *  參考文件：
  *      https://github.com/GlaucoGodoi/TalkApp/tree/master/Code/src/app/modules/speech-support
- *      https://github.com/kamiazya/ngx-speech-recognition
- *      https://github.com/m-hassan-tariq/WebSpeechAPIAngular2
- *      https://medium.com/@glauco.godoi/how-to-allow-your-app-to-listen-your-customers-angular-web-speech-api-2e904d2915e7
-*/
+ */
 
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { getTreeMissingMatchingNodeDefError } from '@angular/cdk/tree';
