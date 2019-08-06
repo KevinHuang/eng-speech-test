@@ -1,6 +1,5 @@
 
 import { Injectable, EventEmitter, NgZone } from '@angular/core';
-import { MatDialog, MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
 
 export interface AppWindow extends Window {
   webkitSpeechRecognition: any;
@@ -22,7 +21,6 @@ export class SpeechSupportService {
   private _supportRecognition: boolean;
   private _speech: any;
   private _lastResult: RecognitionResult = null;
-  private _snackOpened: MatSnackBarRef<SimpleSnackBar>;
 
   public get IsListening(): boolean {
     return this._isListening;
@@ -33,10 +31,10 @@ export class SpeechSupportService {
   }
 
   public Result: EventEmitter<RecognitionResult> = new EventEmitter<RecognitionResult>();
+  public ListenChanged: EventEmitter<ListenStatus> = new EventEmitter<ListenStatus>();
 
 
-
-  constructor(public dialog: MatDialog, private zone: NgZone, private snackBar: MatSnackBar) {
+  constructor() {
     this.init();
   }
 
@@ -87,8 +85,9 @@ export class SpeechSupportService {
   }
   handleSpeechStart(event: any): void {
     this._lastResult = null;
+
     console.log('Listening...');
-    this._snackOpened = this.snackBar.open('Listening...');
+    
   }
 
   handleNoRecognitionAvaliable(event: any): any {
@@ -97,8 +96,10 @@ export class SpeechSupportService {
 
   private handleResultevent(event: any): void {
     console.log('Handling recognition event.')
+    console.log(event);
     const result = event.results[0][0];
     this._lastResult = { confidence: result.confidence, transcript: result.transcript };
+    this.Result.emit(this._lastResult);
 
     console.log(this._lastResult);
   }
@@ -108,26 +109,27 @@ export class SpeechSupportService {
     console.log(event);
     this._isListening = false;
     if (this._lastResult) {
-      (() => { this.showDialog(this._lastResult) })();
+      // (() => { this.showDialog(this._lastResult) })();
     } else {
       this.Result.emit(null);
     }
     this._lastResult = null;
-    if (this._snackOpened) {
-      this._snackOpened.dismiss();
-    }
+    this.ListenChanged.emit({isListen: false});
+    
   }
 
   private handleSpeechEndEvent(event: any): void {
     console.log('Handling speech end event.')
     console.log(event);
     this._isListening = false;
+    
   }
 
   public requestListening(selectedLanguage: string): void {
     this._isListening = true;
     this.setupListener(selectedLanguage);
     this._speech.start();
+    this.ListenChanged.emit({isListen: true});
     console.log('Request listening');
   }
 
@@ -162,4 +164,8 @@ export class SpeechSupportService {
 export interface RecognitionResult {
   transcript: string;
   confidence: number;
+}
+
+export interface ListenStatus {
+  isListen: boolean;
 }

@@ -15,6 +15,7 @@ import { SidenavListComponent } from './natigation/sidenav-list/sidenav-list.com
 import { SidenavHeaderComponent } from './natigation/sidenav-header/sidenav-header.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { SpeechTestComponent } from './speech-test/speech-test.component';
+import { SpeechSupportService } from './speech-service.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { SpeechTestComponent } from './speech-test/speech-test.component';
     MaterialModule,
     FlexLayoutModule,
   ],
-  providers: [GadgetService],
+  providers: [GadgetService, SpeechSupportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

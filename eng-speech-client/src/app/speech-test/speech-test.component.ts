@@ -12,6 +12,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { getTreeMissingMatchingNodeDefError } from '@angular/cdk/tree';
 
 import Speech from 'speak-tts'
+import { SpeechSupportService, RecognitionResult, ListenStatus } from '../speech-service.service';
 
 @Component({
   selector: 'app-speech-test',
@@ -26,20 +27,9 @@ export class SpeechTestComponent implements OnInit {
   isRecording = false;    // 是否正在錄音中
   isAnswerRight = false;  // 是否答對
   answerStatus: number = AnswerStatus.noAnswer;
-  speech: any;
-
-  // questions = [
-  //   { index: 1, content: "Apple", ans_status: AnswerStatus.noAnswer },
-  //   { index: 2, content: "self-confidence", ans_status: AnswerStatus.noAnswer },
-  //   { index: 3, content: "Learn", ans_status: AnswerStatus.noAnswer },
-  //   { index: 4, content: "Free", ans_status: AnswerStatus.noAnswer },
-  //   { index: 5, content: "Forum", ans_status: AnswerStatus.noAnswer },
-  //   { index: 6, content: "News", ans_status: AnswerStatus.noAnswer },
-  //   { index: 7, content: "Search", ans_status: AnswerStatus.noAnswer },
-  //   { index: 8, content: "Tutorial", ans_status: AnswerStatus.noAnswer },
-  //   { index: 9, content: "Command", ans_status: AnswerStatus.noAnswer },
-  //   { index: 10, content: "Animation", ans_status: AnswerStatus.noAnswer }
-  // ];
+  tts: any;  // tts
+  selectedLanguage = 'en-US';
+  isListening: boolean = true;
 
   questions = [
     { index: 1, content: "neighbor", ans_status: AnswerStatus.noAnswer },
@@ -62,8 +52,8 @@ export class SpeechTestComponent implements OnInit {
     // { index: 18, content: "busybody", ans_status: AnswerStatus.noAnswer }
   ]
   constructor(
-    
-    private ref: ChangeDetectorRef
+    public speechRecog: SpeechSupportService,
+    private cdf: ChangeDetectorRef
   ) { }
 
 
@@ -71,13 +61,36 @@ export class SpeechTestComponent implements OnInit {
   ngOnInit() {
     this.currentQ = this.questions[0];
     this.showQ(this.currentQ);
+    this.initSpeechRecognition();
+    this.initTextToSpeech();
 
-    this.speech = new Speech() // will throw an exception if not browser supported
-    if (this.speech.hasBrowserSupport()) { // returns a boolean
+  }
+
+  initSpeechRecognition() {
+    console.log('註冊辨識事件 ....');
+    this.speechRecog.Result.subscribe((result: RecognitionResult) => {
+      console.log('辨識結果：');
+      console.log(result);
+      if (result != null) {
+        this.message = result.transcript;
+        this.checkAnswer();
+      }
+    });
+
+    this.speechRecog.ListenChanged.subscribe((status: ListenStatus) => {
+      console.log(`Listen status changed : ${status.isListen}`);
+      this.isListening = status.isListen;
+      this.cdf.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
+    })
+  }
+
+  initTextToSpeech() {
+    this.tts = new Speech() // will throw an exception if not browser supported
+    if (this.tts.hasBrowserSupport()) { // returns a boolean
       console.log("speech synthesis supported")
     }
 
-    this.speech.init({
+    this.tts.init({
       'volume': 1,
       'lang': 'en-US',
       'rate': 1,
@@ -91,13 +104,17 @@ export class SpeechTestComponent implements OnInit {
     })
   }
 
-  listen() {
-    
+  toggleListen() {
+    if (this.speechRecog.IsListening) {
+      this.speechRecog.stopListening();
+    } else {
+      this.speechRecog.requestListening(this.selectedLanguage);
+    }
   }
 
   speak() {
     console.log(`speak current q : ${this.currentQ}`);
-    this.speech.speak({
+    this.tts.speak({
       text: this.currentQ.content,
     }).then(() => {
       console.log("Success !")
@@ -109,7 +126,7 @@ export class SpeechTestComponent implements OnInit {
   showQ(q) {
     this.currentQ = q;
     this.message = '';         // reset ...
-    this.listen();
+    this.toggleListen();
     // this.currentQIndex = q.index;
     // this.currentQContent = q.content;
     // this.answerStatus = AnswerStatus.noAnswer;
@@ -133,13 +150,6 @@ export class SpeechTestComponent implements OnInit {
     return className;
   }
 
-  startRecording(q) {
-    
-  }
-
-  stopRecording(q) {
-    
-  }
 
   checkAnswer() {
     console.log(`${this.message.toLowerCase()} vs ${this.currentQ.content.toLowerCase()}`);
@@ -166,7 +176,7 @@ export class SpeechTestComponent implements OnInit {
     const q = this.questions[currentQIndex - 1];
     this.currentQ = q;
     this.showQ(q);
-    this.ref.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
+    this.cdf.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
   }
 
   prevQ() {
@@ -179,7 +189,7 @@ export class SpeechTestComponent implements OnInit {
     const q = this.questions[currentQIndex - 1];
     this.currentQ = q;
     this.showQ(q);
-    this.ref.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
+    this.cdf.detectChanges();   // 手動啟動偵測變數改變，才能反映在畫面上
   }
 
   openTranslate() {
