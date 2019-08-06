@@ -44,11 +44,11 @@
 
       <!-- controls -->
       <div class="q-controls">
-        <div class="mic" *ngIf="!(service.started$ | async)">
+        <div class="mic" *ngIf="">
           <mat-icon (click)="listen()">mic</mat-icon>
         </div>
 
-        <div class="pauseRec" *ngIf="service.started$ | async">
+        <div class="pauseRec" *ngIf="">
           <mat-icon class="stopRec" (click)="stopRecording()"
             >pause_circle_outline</mat-icon
           >

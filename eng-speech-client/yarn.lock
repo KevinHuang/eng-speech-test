@@ -110,15 +110,6 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cdk@^7.2.0":
-  version "7.3.7"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.3.7.tgz#ce1ad53ba04beb9c8e950acc5691ea0143753764"
-  integrity sha512-xbXxhHHKGkVuW6K7pzPmvpJXIwpl0ykBnvA2g+/7Sgy5Pd35wCC+UtHD9RYczDM/mkygNxMQtagyCErwFnDtQA==
-  dependencies:
-    tslib "^1.7.1"
-  optionalDependencies:
-    parse5 "^5.0.0"
-
 "@angular/cdk@~8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-8.1.1.tgz#11b11bbab7316b3fa1f9eb380211bfde0a335cc7"
@@ -258,14 +249,6 @@
     chalk "^2.0.0"
     esutils "^2.0.2"
     js-tokens "^4.0.0"
-
-"@kamiazya/ngx-speech-recognition@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@kamiazya/ngx-speech-recognition/-/ngx-speech-recognition-0.4.3.tgz#64f0bc3fab5b15ab9f099f431c72681869d7043a"
-  integrity sha512-ojp9yRoNQ44wpNRXKaC9nPS3j0v6l1WZS3qh0/IKUqbysl+NZB7Y+8oi3Kwfv6ZEJwvZGvf8yJbHPM29tAtPnQ==
-  dependencies:
-    "@angular/cdk" "^7.2.0"
-    tslib "^1.9.0"
 
 "@ngtools/webpack@8.1.2":
   version "8.1.2"

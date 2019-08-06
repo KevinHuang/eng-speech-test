@@ -15,7 +15,6 @@ import { SidenavListComponent } from './natigation/sidenav-list/sidenav-list.com
 import { SidenavHeaderComponent } from './natigation/sidenav-header/sidenav-header.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { SpeechTestComponent } from './speech-test/speech-test.component';
-import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
 
 
 @NgModule({
@@ -35,11 +34,6 @@ import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
     AppRoutingModule,
     MaterialModule,
     FlexLayoutModule,
-    SpeechRecognitionModule.withConfig({
-      lang: 'en-US',
-      interimResults: true,
-      maxAlternatives: 10,
-    }),
   ],
   providers: [GadgetService],
   bootstrap: [AppComponent]

@@ -9,13 +9,6 @@
 */
 
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import {
-  RxSpeechRecognitionService,
-  SpeechRecognitionLang,
-  SpeechRecognitionMaxAlternatives,
-  SpeechRecognitionGrammars,
-  resultList,
-} from '@kamiazya/ngx-speech-recognition';
 import { getTreeMissingMatchingNodeDefError } from '@angular/cdk/tree';
 
 import Speech from 'speak-tts'
@@ -24,17 +17,6 @@ import Speech from 'speak-tts'
   selector: 'app-speech-test',
   templateUrl: './speech-test.component.html',
   styleUrls: ['./speech-test.component.css'],
-  providers: [
-    {
-      provide: SpeechRecognitionLang,
-      useValue: 'en-US',
-    },
-    {
-      provide: SpeechRecognitionMaxAlternatives,
-      useValue: 1,
-    },
-    RxSpeechRecognitionService,
-  ],
 })
 export class SpeechTestComponent implements OnInit {
   message = '';
@@ -80,7 +62,7 @@ export class SpeechTestComponent implements OnInit {
     // { index: 18, content: "busybody", ans_status: AnswerStatus.noAnswer }
   ]
   constructor(
-    public service: RxSpeechRecognitionService,
+    
     private ref: ChangeDetectorRef
   ) { }
 
@@ -110,17 +92,7 @@ export class SpeechTestComponent implements OnInit {
   }
 
   listen() {
-    this.service
-      .listen()
-      .pipe(resultList)
-      .subscribe((list: SpeechRecognitionResultList) => {
-        this.message = list.item(0).item(0).transcript;
-        if (list.item(0).isFinal) {
-          this.isRecording = false;
-          this.checkAnswer();
-        }
-        console.log(list, this.message);
-      });
+    
   }
 
   speak() {
@@ -162,12 +134,11 @@ export class SpeechTestComponent implements OnInit {
   }
 
   startRecording(q) {
-    this.isRecording = true;
-    this.listen();
+    
   }
 
   stopRecording(q) {
-    this.isRecording = false;
+    
   }
 
   checkAnswer() {
