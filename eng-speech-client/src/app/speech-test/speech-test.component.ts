@@ -29,14 +29,25 @@ export class SpeechTestComponent implements OnInit {
   isListening: boolean = true;
 
   questions = [
-    { index: 1, content: "neighbor", ans_status: AnswerStatus.noAnswer },
-    { index: 2, content: "neighborhood", ans_status: AnswerStatus.noAnswer },
-    { index: 3, content: "settle in", ans_status: AnswerStatus.noAnswer },
-    { index: 4, content: "the scoop", ans_status: AnswerStatus.noAnswer },
-    { index: 5, content: "tip", ans_status: AnswerStatus.noAnswer },
-    { index: 6, content: "take a rain check", ans_status: AnswerStatus.noAnswer },
-    { index: 7, content: "social event", ans_status: AnswerStatus.noAnswer },
-    { index: 8, content: "joiner", ans_status: AnswerStatus.noAnswer },
+    // { index: 1, content: "base", ans_status: AnswerStatus.noAnswer },
+    { index: 1, content: "tower", ans_status: AnswerStatus.noAnswer },
+    { index: 2, content: "prisoner", ans_status: AnswerStatus.noAnswer },
+    { index: 3, content: "wicked witch", ans_status: AnswerStatus.noAnswer },
+    { index: 4, content: "probably", ans_status: AnswerStatus.noAnswer },
+    { index: 5, content: "tell", ans_status: AnswerStatus.noAnswer },
+    { index: 6, content: "Princess Rapunzel", ans_status: AnswerStatus.noAnswer },
+    { index: 7, content: "kingdom", ans_status: AnswerStatus.noAnswer },
+    { index: 8, content: "Prince Charming", ans_status: AnswerStatus.noAnswer },
+    { index: 9, content: "rescue", ans_status: AnswerStatus.noAnswer },
+    { index: 10, content: "climb up", ans_status: AnswerStatus.noAnswer },
+    // { index: 1, content: "neighbor", ans_status: AnswerStatus.noAnswer },
+    // { index: 2, content: "neighborhood", ans_status: AnswerStatus.noAnswer },
+    // { index: 3, content: "settle in", ans_status: AnswerStatus.noAnswer },
+    // { index: 4, content: "the scoop", ans_status: AnswerStatus.noAnswer },
+    // { index: 5, content: "tip", ans_status: AnswerStatus.noAnswer },
+    // { index: 6, content: "take a rain check", ans_status: AnswerStatus.noAnswer },
+    // { index: 7, content: "social event", ans_status: AnswerStatus.noAnswer },
+    // { index: 8, content: "joiner", ans_status: AnswerStatus.noAnswer },
     // { index: 9, content: "keep to oneself", ans_status: AnswerStatus.noAnswer },
     // { index: 10, content: "appoint oneself", ans_status: AnswerStatus.noAnswer },
     // { index: 11, content: "resident", ans_status: AnswerStatus.noAnswer },
@@ -57,9 +68,9 @@ export class SpeechTestComponent implements OnInit {
 
   ngOnInit() {
     this.currentQ = this.questions[0];
-    this.showQ(this.currentQ);
     this.initSpeechRecognition();
     this.initTextToSpeech();
+    this.showQ(this.currentQ);
 
   }
 
