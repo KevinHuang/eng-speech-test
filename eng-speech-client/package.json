@@ -23,7 +23,7 @@
     "@angular/router": "^8.1.2",
     "core-js": "~3.1.4",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.2",
     "speak-tts": "^2.0.8",
